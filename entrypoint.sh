@@ -20,10 +20,11 @@ fi
 
 if [ -n "${INPUT_OCI_CLI_KEY_CONTENT:-}" ]; then
   echo "${INPUT_OCI_CLI_KEY_CONTENT}" >> $HOME/.oci/oci_api_key.pem
-  echo key_file=$HOME/.oci/oci_api_key.pem >> $HOME/.oci/config
+  echo key_file=/root/.oci/oci_api_key.pem >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OCI_CLI_REGION:-}" ]; then
+  export OCI_CLI_REGION="${INPUT_OCI_CLI_REGION}"
   echo region="${INPUT_OCI_CLI_REGION}" >> $HOME/.oci/config
 fi
 
@@ -45,7 +46,7 @@ mkdir -p $HOME/.kube
 oci ce cluster create-kubeconfig \
 --cluster-id ${OKE_CLUSTER_ID} \
 --file $HOME/.kube/config \
---region OCI_CLI_REGION \
+--region ${OCI_CLI_REGION} \
 --token-version 2.0.0  \
 --kube-endpoint PUBLIC_ENDPOINT
 

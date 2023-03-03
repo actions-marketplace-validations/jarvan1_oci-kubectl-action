@@ -14,7 +14,7 @@ jobs:
     steps:
       # --- #
       - name: Build and push CONTAINER_NAME
-        uses: jarvan1/eks-kubectl-action@latest
+        uses: jarvan1/oci-kubectl-action@latest
         with:
           oci_cli_user: ${{ secrets.OCI_CLI_USER }}
           oci_cli_tenancy: ${{ secrets.OCI_CLI_TENANCY }}
@@ -39,7 +39,7 @@ jobs:
     steps:
       # --- #
       - name: Build and push CONTAINER_NAME
-        uses: jarvan1/eks-kubectl-action@latest
+        uses: jarvan1/oci-kubectl-action@latest
         with:
           oci_cli_user: ${{ secrets.OCI_CLI_USER }}
           oci_cli_tenancy: ${{ secrets.OCI_CLI_TENANCY }}

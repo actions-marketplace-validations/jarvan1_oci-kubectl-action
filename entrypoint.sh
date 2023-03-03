@@ -11,7 +11,7 @@ debug() {
 mkdir -p $HOME/.oci
 if [ -n "${INPUT_OCI_CLI_USER:-}" ]; then
   echo "[DEFAULT]" >> $HOME/.oci/config
-  echo user=$OCI_CLI_USER >> $HOME/.oci/config
+  echo user=$INPUT_OCI_CLI_USER >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OCI_CLI_TENANCY:-}" ]; then

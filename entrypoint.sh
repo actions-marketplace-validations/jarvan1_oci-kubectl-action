@@ -8,25 +8,27 @@ debug() {
     echo "DEBUG: :: $*" >&2
   fi
 }
-
+mkdir -p $HOME/.oci
 if [ -n "${INPUT_OCI_CLI_USER:-}" ]; then
-  export OCI_CLI_USER="${INPUT_OCI_CLI_USER}"
+  echo "[DEFAULT]" >> $HOME/.oci/config
+  echo user=$OCI_CLI_USER >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OCI_CLI_TENANCY:-}" ]; then
-  export OCI_CLI_TENANCY="${INPUT_OCI_CLI_TENANCY}"
+  echo tenancy="${INPUT_OCI_CLI_TENANCY}" >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OCI_CLI_KEY_CONTENT:-}" ]; then
-  export OCI_CLI_KEY_CONTENT="${INPUT_OCI_CLI_KEY_CONTENT}"
+  echo "${INPUT_OCI_CLI_KEY_CONTENT}" >> $HOME/.oci/oci_api_key.pem
+  echo key_file=$HOME/.oci/oci_api_key.pem >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OCI_CLI_REGION:-}" ]; then
-  export OCI_CLI_REGION="${INPUT_OCI_CLI_REGION}"
+  echo region="${INPUT_OCI_CLI_REGION}" >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OCI_CLI_FINGERPRINT:-}" ]; then
-  export OCI_CLI_FINGERPRINT="${INPUT_OCI_CLI_FINGERPRINT}"
+  echo fingerprint="${INPUT_OCI_CLI_FINGERPRINT}" >> $HOME/.oci/config
 fi
 
 if [ -n "${INPUT_OKE_CLUSTER_ID:-}" ]; then
